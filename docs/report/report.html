@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>소상공인 인스타그램 홍보 게시물 생성 서비스 보고서</title>
+<style>
+@page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+:root { --fg:#1d2420; --muted:#5d675f; --line:#cfd6d0; --acc:#2f6f5e; --chip:#e8f0ec; }
+* { box-sizing: border-box; }
+body { font: 10.5pt/1.65 "Malgun Gothic","Noto Sans KR",sans-serif; color: var(--fg); margin: 0; }
+h1 { font-size: 20pt; margin: 0 0 4pt; line-height: 1.3; }
+h2 { font-size: 13.5pt; margin: 20pt 0 6pt; padding-bottom: 3pt; border-bottom: 2px solid var(--acc); color: var(--acc); break-after: avoid; }
+h3 { font-size: 11pt; margin: 12pt 0 4pt; break-after: avoid; }
+p { margin: 4pt 0 6pt; }
+.meta { color: var(--muted); font-size: 9.5pt; margin-bottom: 10pt; }
+.lead { background: var(--chip); border-left: 4px solid var(--acc); padding: 8pt 12pt; margin: 8pt 0 10pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 9.5pt; break-inside: avoid; }
+th, td { border: 1px solid var(--line); padding: 4pt 7pt; text-align: left; vertical-align: top; }
+th { background: var(--chip); font-weight: 700; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+code { font: 9pt Consolas,"Malgun Gothic",monospace; background: #f1f3f1; padding: 0 3pt; border-radius: 3px; }
+pre { font: 9pt/1.5 Consolas,"Malgun Gothic",monospace; background: #f1f3f1; padding: 7pt 10pt; border-radius: 4px; white-space: pre-wrap; break-inside: avoid; }
+ul { margin: 4pt 0 8pt; padding-left: 16pt; } li { margin: 2pt 0; }
+.note { color: var(--muted); font-size: 9.5pt; }
+.flow { display: flex; gap: 6pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.flow div { flex: 1; border: 1px solid var(--line); border-radius: 5px; padding: 6pt 7pt; font-size: 9.2pt; }
+.flow b { display: block; color: var(--acc); margin-bottom: 2pt; }
+.imgs { display: flex; gap: 10pt; margin: 8pt 0 4pt; break-inside: avoid; }
+.imgs figure { flex: 1; margin: 0; } .imgs img { width: 100%; border: 1px solid var(--line); }
+.imgs figcaption { font-size: 9pt; color: var(--muted); margin-top: 3pt; }
+</style>
+</head>
+<body>
+
+<h1>소상공인 인스타그램 홍보 게시물 생성 서비스</h1>
+<div class="meta">고급 프로젝트(개인) 보고서 · 2026-11-12 · https://github.com/hapari9997/insta-ad-generator</div>
+
+<div class="lead">업종, 행사명, 일시, 장소, 혜택, 분위기를 입력하면 <b>인스타그램 피드 이미지(4:5), 캡션, 해시태그</b>를 한 번에 만들어 주는 서비스입니다. 문구는 로컬 LLM(Qwen3-4B), 배경은 Stable Diffusion XL이 만들고 글자는 코드로 얹습니다.</div>
+
+<h2>1. 개요</h2>
+<table>
+<tr><th style="width:18%">항목</th><th>내용</th></tr>
+<tr><td>문제</td><td>디자인 역량과 시간이 없는 소상공인이 행사·이벤트 홍보 게시물을 직접 만들기 어렵다.</td></tr>
+<tr><td>대상</td><td>업종 제한이 없다. 업종은 프롬프트의 입력값이다.</td></tr>
+<tr><td>입력</td><td>업종, 행사명, 일시, 장소, 혜택(선택), 분위기(따뜻함·미니멀·레트로·모던)</td></tr>
+<tr><td>출력</td><td>헤드라인·서브카피·일시·장소·혜택이 얹힌 1080×1350 이미지, 캡션, 해시태그 6~8개</td></tr>
+<tr><td>화면</td><td>Streamlit. 생성, 다시 생성, 서브카피 수정, 이미지 다운로드, 캡션 복사</td></tr>
+<tr><td>실행 환경</td><td>NVIDIA GPU 1개(VRAM 8GB 이상). 모델을 내려받은 뒤에는 인터넷 없이 실행. 사전학습 모델을 추론에만 사용</td></tr>
+</table>
+
+<h2>2. 구조</h2>
+<div class="flow">
+<div><b>① 폼</b>Streamlit 입력, 필수 항목 검사, 대기번호 발급</div>
+<div><b>② 문구</b>Qwen3-4B(4bit)가 헤드라인·서브카피·캡션·해시태그·영어 이미지 프롬프트를 JSON으로 생성</div>
+<div><b>③ 배경</b>LLM을 메모리에서 내린 뒤 SDXL이 글자 없는 4:5 배경 생성</div>
+<div><b>④ 합성</b>Pillow가 글자를 얹고 일시·장소·혜택은 입력 원문 그대로 붙임</div>
+</div>
+<table>
+<tr><th style="width:42%">설계</th><th>이유</th></tr>
+<tr><td>글자는 이미지 모델이 아니라 Pillow로 얹는다. 이미지 모델에는 글자 없는 배경만 요청한다</td><td>이미지 모델은 날짜·가격 같은 글자를 틀리기 쉽다. 코드로 얹으면 정확하다.</td></tr>
+<tr><td>일시·장소·혜택은 입력값을 그대로 쓴다. 혜택은 LLM에 전달하지 않는다</td><td>LLM이 혜택을 줄여 쓰다가 뜻을 바꾸는 사례가 있었다. 예: "엔진오일 교환 시 타이어 점검 무료"가 "엔진오일 교환 시 무료"로 바뀜.</td></tr>
+<tr><td>LLM과 이미지 모델을 순차 실행한다</td><td>VRAM 8GB에서 두 모델을 동시에 올릴 수 없다. 최대 사용량은 문구 단계 3.04GB, 이미지 단계 5.58GB.</td></tr>
+<tr><td>LLM 출력을 검증하고 재시도한다</td><td>작은 모델은 JSON 형식과 금지 규칙을 자주 어긴다.</td></tr>
+</table>
+
+<h2>3. 사용 모델</h2>
+<table>
+<tr><th style="width:22%">용도</th><th style="width:30%">모델</th><th>선정 근거</th></tr>
+<tr><td>문구 생성</td><td><b>Qwen3-4B-Instruct-2507</b><br>4bit(nf4) 양자화 로드</td><td>상업적 사용이 가능한 라이선스(Apache-2.0)이고 한국어 문구를 생성한다. 같은 입력 3건에서 4bit는 8bit보다 약 3배 빠르고(8.0 대 1.9~2.7 tok/s) VRAM을 1.6GB 적게 쓰며(2.8GB 대 4.4GB), JSON 형식 성공률은 같았다(3/3).</td></tr>
+<tr><td>배경 이미지</td><td><b>Stable Diffusion XL base 1.0</b><br>fp16, CPU 오프로드</td><td>SD 1.5보다 화질이 좋다. 1장 19~26초, 최대 VRAM 5.3GB. 오프로드 없이 올리면 VRAM을 넘겨 약 11분이 걸린다. 896×1120으로 생성해 1080×1350으로 키우고, 25단계, guidance 7.0.</td></tr>
+</table>
+<p class="note">양자화는 저장 정밀도를 낮추는 것이고 학습이 아닙니다. 오프로드는 모델 일부를 평소에는 CPU 메모리에 두고 필요할 때만 GPU로 옮기는 방식입니다.</p>
+
+<h2>4. 구현</h2>
+<table>
+<tr><th style="width:26%">파일</th><th>역할</th></tr>
+<tr><td><code>app.py</code></td><td>Streamlit 화면. 폼, 생성, 다시 생성, 서브카피 수정, 다운로드, 대기번호 표시</td></tr>
+<tr><td><code>src/pipeline.py</code></td><td>문구 → LLM 해제 → 배경 → 글자 합성 순서 제어, 글자만 다시 얹는 <code>recompose()</code></td></tr>
+<tr><td><code>src/text_gen.py</code></td><td>LLM 로드·해제, JSON 파싱, 출력 검증과 재시도</td></tr>
+<tr><td><code>src/image_gen.py</code></td><td>SDXL 배경 생성 (오프로드)</td></tr>
+<tr><td><code>src/compose.py</code></td><td>Pillow 글자 합성. 헤드라인 3줄 이내(글자 크기 96→56 축소), 서브카피, 정보 줄. Noto Sans KR 사용</td></tr>
+<tr><td><code>src/ticket_queue.py</code></td><td>대기번호 큐. 요청을 순서대로 처리하고 앞사람 수와 예상 시간을 계산</td></tr>
+<tr><td><code>src/prompts/templates.py</code></td><td>시스템 프롬프트와 폼 → 프롬프트 변환</td></tr>
+<tr><td><code>evaluation/</code></td><td>검증 케이스 12개, 문구 검증, 이미지 검증</td></tr>
+</table>
+
+<h3>4.1 프롬프트 설계</h3>
+<ul>
+<li>시스템 프롬프트가 JSON 키 5개(headline, subcopy, caption, hashtags, image_prompt_en)와 길이를 지정한다.</li>
+<li>서브카피·캡션에 날짜, 요일, 시간, 휴무, 장소, 혜택을 쓰지 못하게 한다. 이 정보는 코드가 따로 붙인다.</li>
+<li>입력의 "분위기" 라벨은 LLM에는 "문체"로 전달하고, "분위기"라는 단어와 스타일 이름을 문장에 쓰지 못하게 한다.</li>
+<li>이미지 프롬프트는 글자 없는 배경을 영어 한 문장으로 쓰고 "no text", "empty space for text"를 포함하게 한다. 분위기는 별도의 영어 스타일 문구로 덧붙인다.</li>
+</ul>
+
+<h3>4.2 출력 검증과 재시도</h3>
+<table>
+<tr><th style="width:44%">문제</th><th>대응</th></tr>
+<tr><td>JSON 형식을 어김</td><td>시드를 바꿔 다시 생성. 총 3회까지</td></tr>
+<tr><td>서브카피에 숫자(날짜·시간·지어낸 할인율)</td><td>다시 생성</td></tr>
+<tr><td>3회로 못 고친 경우</td><td>문제가 가장 적은 결과를 사용 (실패로 끝내지 않음)</td></tr>
+<tr><td>이미지 프롬프트에 "empty space for text" 누락</td><td>코드가 덧붙임</td></tr>
+<tr><td>혜택의 의미 왜곡</td><td>혜택을 LLM에 전달하지 않고 코드가 원문을 이미지와 캡션에 붙임</td></tr>
+</table>
+
+<h3>4.3 사용자 기능</h3>
+<ul>
+<li><b>다시 생성:</b> 같은 입력으로 새 시드를 뽑아 다시 만든다.</li>
+<li><b>서브카피 수정:</b> 결과 아래 입력칸(최대 40자)에서 고치고 "글자 다시 입히기"를 누르면 배경은 두고 글자만 다시 얹는다. 모델을 쓰지 않아 바로 끝난다.</li>
+<li><b>대기번호:</b> GPU 하나에 모델을 번갈아 올리므로 동시 요청은 번호순으로 처리하고 대기 중에는 앞사람 수와 예상 시간을 보여 준다. 실패하거나 페이지를 떠나도 번호를 반납한다.</li>
+<li><b>내보내기:</b> 이미지 PNG 다운로드, 캡션 복사.</li>
+</ul>
+
+<h2>5. 검증</h2>
+<h3>5.1 방법</h3>
+<p>12개 업종(꽃집, 카페, 정비소, 미용실, 학원, 베이커리, 헬스장, 반려동물 미용, 한식당, 네일, 서점, 세탁소)을 시드 2개씩 총 24회 생성해 점검했습니다. 혜택이 없는 경우와 일시·장소·혜택이 매우 긴 경계 사례를 포함합니다. 정답 문구나 실제 광고 이미지 세트가 없어 BLEU·FID 같은 표준 지표는 쓰지 않고, 자동 규칙 점검과 생성 결과를 직접 읽는 확인을 함께 썼습니다.</p>
+
+<h3>5.2 문구 결과 (24회)</h3>
+<table>
+<tr><th>점검</th><th class="n">결과</th></tr>
+<tr><td>JSON 형식 성공 (재시도 포함)</td><td class="n">24/24</td></tr>
+<tr><td>헤드라인 5~22자, 캡션 40~300자, 해시태그 6~8개·형식</td><td class="n">24/24</td></tr>
+<tr><td>서브카피 10~40자</td><td class="n">22/24</td></tr>
+<tr><td>최종 캡션에 일시·장소·혜택이 입력 그대로 있음</td><td class="n">24/24</td></tr>
+<tr><td>이미지 프롬프트에 "no text"와 "empty space for text" 포함</td><td class="n">24/24</td></tr>
+<tr><td>서브카피에 숫자 없음</td><td class="n">22/24</td></tr>
+<tr><td>서브카피·캡션에 "분위기" 단어 없음</td><td class="n">19/24</td></tr>
+<tr><td>행사명 단어가 문구에 반영됨</td><td class="n">22/24</td></tr>
+<tr><td>문구 생성 시간 (재시도 포함)</td><td class="n">평균 32.1초, 최대 58.0초</td></tr>
+</table>
+<p class="note">서브카피에 숫자가 남은 2건은 입력에 있는 영업시간("8시30분")을 반복한 경우입니다. "분위기" 단어가 남은 5건은 재시도 3회로 고치지 못해 문제가 가장 적은 결과를 쓴 경우입니다.</p>
+
+<h3>5.3 이미지 결과 (12장)</h3>
+<table>
+<tr><th>점검</th><th class="n">결과</th></tr>
+<tr><td>1장 평균 시간 (모델 로드 포함)</td><td class="n">26.9초 (최대 31.9초)</td></tr>
+<tr><td>최대 VRAM</td><td class="n">5.58GB</td></tr>
+<tr><td>글자가 여백 안에 배치됨</td><td class="n">12/12</td></tr>
+<tr><td>글자 영역이 이미지 높이의 50% 이하</td><td class="n">12/12</td></tr>
+<tr><td>글자 대비 4.5 이상 (자동 지표)</td><td class="n">3/12</td></tr>
+</table>
+<p>자동 대비 지표는 보수적이어서 육안과 차이가 있습니다. 직접 본 4장(꽃집, 정비소, 카페, 세탁소)은 모두 글자가 읽혔고 배경에 글자·로고는 없었습니다. 다만 피사체가 헤드라인 근처까지 올라와 글자 뒤에 놓이는 경우가 있고, 흰 옷이 있는 세탁소 이미지는 대비가 가장 약했습니다.</p>
+<div class="imgs">
+<figure><img src="sample_flower.jpg"><figcaption>꽃집</figcaption></figure>
+<figure><img src="sample_garage.jpg"><figcaption>정비소. 혜택 줄은 입력 원문 그대로</figcaption></figure>
+<figure><img src="sample_cafe.jpg"><figcaption>카페. 혜택을 입력하지 않으면 정보 줄에 나타나지 않음</figcaption></figure>
+</div>
+
+<h2>6. 한계</h2>
+<table>
+<tr><th style="width:32%">항목</th><th>내용</th></tr>
+<tr><td>생성 시간</td><td>재시도가 많으면 문구 단계만 58초까지 걸린다. 이미지 단계는 별도로 약 25초.</td></tr>
+<tr><td>이미지 구도</td><td>피사체가 글자 뒤에 놓일 수 있고, 밝은 배경에서는 대비가 약하다. 글자 가독성은 하단 그림자(그라데이션)로 보완한다.</td></tr>
+<tr><td>문구 품질</td><td>소형 모델이라 어색한 한국어와 비슷한 결과의 반복이 있을 수 있다.</td></tr>
+<tr><td>대기번호</td><td>대기 중 같은 사용자가 화면을 다시 실행하면 번호를 잃는다.</td></tr>
+<tr><td>서비스 수준</td><td>로컬 프로토타입. 동시 사용자 대량 처리, 배포, 인증은 범위 밖이다.</td></tr>
+</table>
+<p><b>개선 방향:</b> 요일·한글 숫자·길이 검증 추가, 이미지 구도 개선(피사체를 위쪽으로)과 대비 지표 보정, 캡션 수정 기능, 재시도 횟수와 시간의 균형 조정.</p>
+
+<h2>7. 사용법</h2>
+<pre>python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt            # torch 는 CUDA 빌드가 필요
+hf download Qwen/Qwen3-4B-Instruct-2507
+hf download stabilityai/stable-diffusion-xl-base-1.0
+python -m streamlit run app.py             # 브라우저에서 localhost:8501</pre>
+<p>모델은 오프라인 로드(<code>local_files_only</code>)이므로 처음 한 번은 위 두 모델을 내려받아야 합니다. 자세한 내용은 저장소의 <code>README.md</code>를 참고하세요. 화면 없이 한 번만 돌려 보려면 <code>python scripts/run_once.py</code>를 씁니다.</p>
+<p>개발 환경: Windows 11, Python 3.13, torch 2.12.0+cu132, transformers 5.12.1, diffusers 0.42.0, bitsandbytes 0.50.0, accelerate 1.14.0, streamlit 1.65.0, pillow 12.2.0.</p>
+
+<h2>부록 A. 라이선스</h2>
+<table>
+<tr><th>구성 요소</th><th>라이선스</th></tr>
+<tr><td>Qwen3-4B-Instruct-2507</td><td>Apache-2.0</td></tr>
+<tr><td>Stable Diffusion XL base 1.0</td><td>CreativeML Open RAIL++-M. 상업적 사용을 허용하는 것으로 읽히며 사용 제한 조항(불법 사용, 미성년자 착취, 유해한 허위정보, 의료 조언 등)이 있다. 법률 자문이 아니다.</td></tr>
+<tr><td>Noto Sans KR 폰트 (<code>assets/fonts</code>)</td><td>SIL Open Font License 1.1</td></tr>
+</table>
+
+<h2>부록 B. 용어</h2>
+<table>
+<tr><th style="width:20%">용어</th><th>뜻</th></tr>
+<tr><td>추론</td><td>이미 학습된 모델에 입력을 넣어 결과를 얻는 것.</td></tr>
+<tr><td>양자화(4bit)</td><td>모델 숫자의 정밀도를 낮춰 용량과 VRAM을 줄이는 방법.</td></tr>
+<tr><td>오프로드</td><td>모델 일부를 평소에는 CPU 메모리에 두고 필요할 때만 GPU로 옮기는 방식. 느려지지만 VRAM에 들어간다.</td></tr>
+<tr><td>환각</td><td>모델이 입력에 없는 내용을 지어내거나 입력을 다르게 바꿔 말하는 현상.</td></tr>
+<tr><td>시드</td><td>무작위 생성의 시작값. 같은 시드와 입력이면 같은 결과가 나온다.</td></tr>
+<tr><td>Streamlit</td><td>파이썬 코드만으로 웹 화면을 만드는 도구.</td></tr>
+</table>
+
+</body>
+</html>

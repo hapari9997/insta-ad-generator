@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# 생성 결과와 모델 파일은 저장소에 올리지 않는다 (모델은 Hugging Face 캐시에서 불러온다)
+outputs/
+evaluation/results/images/
+*.safetensors
+*.gguf
+*.bin

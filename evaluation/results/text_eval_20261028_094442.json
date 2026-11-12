@@ -1,0 +1,831 @@
+{
+  "meta": {
+    "when": "2026-10-28 09:44",
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "cases": 12,
+    "seeds": 2,
+    "load_s": 9.5,
+    "peak_vram_gb": 3.02,
+    "mean_s": 16.0,
+    "max_s": 20.4,
+    "diversity": "5/12 (42%)"
+  },
+  "runs": [
+    {
+      "case_id": "flower",
+      "seed": 100,
+      "seconds": 17.3,
+      "copy": {
+        "headline": "봄맞이 꽃다발 할인",
+        "subcopy": "따뜻한 봄을 꽃으로 선물해요",
+        "caption": "봄의 첫걸음, 따뜻한 꽃으로 마음을 다독여요. 향기로운 꽃이 가득 담긴 다발이 따뜻한 하루를 시작해요. 봄이 오면 꽃이 먼저 웃어요.",
+        "hashtags": [
+          "#봄맞이꽃다발",
+          "#마포꽃집",
+          "#따뜻한봄",
+          "#꽃으로사랑",
+          "#라일락플라워",
+          "#봄꽃할인"
+        ],
+        "image_prompt_en": "a warm spring flower shop interior with soft sunlight, fresh flowers arranged on tables, wooden decor, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "flower",
+      "seed": 101,
+      "seconds": 15.6,
+      "copy": {
+        "headline": "봄맞이 꽃다발 할인",
+        "subcopy": "따뜻한 봄, 꽃으로 만나요",
+        "caption": "봄의 첫걸음, 꽃으로 따뜻한 하루를 시작해보세요. 향기로운 꽃이 마음을 녹여줍니다. 따뜻한 봄 분위기, 꽃으로 선물해보세요.",
+        "hashtags": [
+          "#봄맞이꽃다발",
+          "#꽃집할인",
+          "#마포꽃집",
+          "#따뜻한봄",
+          "#라일락플라워",
+          "#봄꽃선물"
+        ],
+        "image_prompt_en": "a warm spring flower shop interior with soft sunlight, blooming flowers, and gentle colors, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "cafe",
+      "seed": 100,
+      "seconds": 14.8,
+      "copy": {
+        "headline": "가을 신메뉴 출시!",
+        "subcopy": "레트로 분위기에서 즐기세요",
+        "caption": "가을 분위기의 레트로 카페, 모카빈에서 신메뉴를 만나보세요. 따뜻한 분위기와 특별한 맛이 어우러진 순간을 선물합니다.",
+        "hashtags": [
+          "#가을신메뉴",
+          "#레트로카페",
+          "#모카빈",
+          "#부산카페",
+          "#해운대카페",
+          "#가을분위기"
+        ],
+        "image_prompt_en": "a retro-style cafe interior with warm lighting, wooden tables, vintage decor, and autumn leaves in the background, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "cafe",
+      "seed": 101,
+      "seconds": 15.4,
+      "copy": {
+        "headline": "가을 신메뉴 출시!",
+        "subcopy": "레트로 분위기로 만나요",
+        "caption": "가을 분위기의 레트로 카페, 모카빈에서 신메뉴를 만나보세요. 따뜻한 분위기 속에서 따뜻한 음료를 즐겨보세요. 오랜 기억을 되살리는 맛을 경험해보세요.",
+        "hashtags": [
+          "#가을신메뉴",
+          "#레트로카페",
+          "#모카빈",
+          "#부산카페",
+          "#가을분위기",
+          "#우동카페"
+        ],
+        "image_prompt_en": "A retro-style cafe interior with warm lighting, vintage furniture, and autumn leaves in the background, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "garage",
+      "seed": 100,
+      "seconds": 14.2,
+      "copy": {
+        "headline": "겨울 타이어 무료 점검",
+        "subcopy": "겨울철 안전을 위해 함께 해요",
+        "caption": "겨울철 타이어 상태를 무료로 점검해요. 모던한 분위기에서 차량을 안전하게 관리하세요. 정비 전문가의 정확한 조언을 받아보세요.",
+        "hashtags": [
+          "#겨울타이어점검",
+          "#자동차정비소",
+          "#믿음카센터",
+          "#안전한운전",
+          "#타이어점검",
+          "#대전정비소"
+        ],
+        "image_prompt_en": "modern automotive workshop with clean white walls, soft lighting, and no text or empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "garage",
+      "seed": 101,
+      "seconds": 14.7,
+      "copy": {
+        "headline": "겨울 타이어 무료 점검",
+        "subcopy": "겨울철 안전을 위해 무료로 점검해요",
+        "caption": "겨울철 타이어 상태를 모던하게 점검해 보세요. 출퇴근과 여행에 최적의 안전을 확보하세요. 신뢰할 수 있는 정비 서비스를 경험해 보세요.",
+        "hashtags": [
+          "#겨울타이어점검",
+          "#자동차정비소",
+          "#안전한겨울차",
+          "#믿음카센터",
+          "#타이어점검",
+          "#대전정비소"
+        ],
+        "image_prompt_en": "modern car garage with winter tires, soft lighting, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "salon",
+      "seed": 100,
+      "seconds": 14.9,
+      "copy": {
+        "headline": "1주년, 감사합니다",
+        "subcopy": "미니멀한 하루를 함께합니다",
+        "caption": "간결한 분위기, 진정한 헤어 라이프. 매일의 헤어 스타일이 더 깔끔해지도록 도와드립니다. 한 해를 감사하며, 다음 한 해를 기다립니다.",
+        "hashtags": [
+          "#헤어아틀리에",
+          "#미니멀헤어",
+          "#1주년감사",
+          "#인천헤어",
+          "#구월동헤어",
+          "#헤어라이프"
+        ],
+        "image_prompt_en": "minimalist hair salon interior with soft natural light, wooden furniture, neutral tones, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "salon",
+      "seed": 101,
+      "seconds": 14.3,
+      "copy": {
+        "headline": "1주년, 감사합니다",
+        "subcopy": "미니멀한 헤어 뷰티를 선보입니다",
+        "caption": "단순한 스타일, 진정한 헤어 미니멀을 선사합니다. 매일의 삶을 더 깔끔하게 만드는 순간입니다.",
+        "hashtags": [
+          "#헤어아틀리에",
+          "#미니멀헤어",
+          "#인천미용",
+          "#1주년감사",
+          "#헤어브랜드",
+          "#구월동미용"
+        ],
+        "image_prompt_en": "a minimalist hair salon interior with soft natural light, neutral tones, wooden furniture, and empty space for text, no text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "academy",
+      "seed": 100,
+      "seconds": 13.7,
+      "copy": {
+        "headline": "겨울방학 특강 설명회",
+        "subcopy": "수학 실력, 한층 높이세요",
+        "caption": "모던한 분위기에서 수학의 힘을 경험하세요. 학생들의 성장을 위한 특별한 순간입니다. 문제 해결 능력을 키워보세요.",
+        "hashtags": [
+          "#수학특강",
+          "#겨울방학학습",
+          "#수리탐구학원",
+          "#수학성장",
+          "#모던수학",
+          "#특강설명회"
+        ],
+        "image_prompt_en": "a modern-style study room with soft lighting, books, and whiteboards, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "academy",
+      "seed": 101,
+      "seconds": 14.9,
+      "copy": {
+        "headline": "겨울방학, 수학 특강 시작!",
+        "subcopy": "실력 향상에 집중하는 특강",
+        "caption": "모던한 분위기에서 수학의 힘을 경험해보세요. 학습의 정서를 함께 느껴보세요. 실력이 빠르게 올라가기 위한 특별한 순간입니다.",
+        "hashtags": [
+          "#수학특강",
+          "#겨울방학학습",
+          "#수리탐구학원",
+          "#모던수학",
+          "#실력향상",
+          "#특강설명회"
+        ],
+        "image_prompt_en": "modern studio interior with soft lighting, wooden desks, books, and a whiteboard, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "bakery",
+      "seed": 100,
+      "seconds": 17.2,
+      "copy": {
+        "headline": "크리스마스 케이크 예약 오픈",
+        "subcopy": "12월, 따뜻한 기분으로",
+        "caption": "겨울의 따뜻함을 케이크로 전해요. 달콤한 밀과버터의 향기로 가득한 크리스마스 케이크, 마음을 다독여 줍니다. 가족과 함께하는 따뜻한 순간을 만들어보세요.",
+        "hashtags": [
+          "#크리스마스케이크",
+          "#밀과버터",
+          "#광주베이커리",
+          "#겨울따뜻함",
+          "#크리스마스예약",
+          "#베이커리소개"
+        ],
+        "image_prompt_en": "a cozy bakery interior at Christmas with warm lighting, soft pastel colors, and a cake display, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "bakery",
+      "seed": 101,
+      "seconds": 17.4,
+      "copy": {
+        "headline": "크리스마스 케이크 예약 시작",
+        "subcopy": "12월, 따뜻한 향기로 시작해요",
+        "caption": "붉은 조명 아래 베이커리의 따뜻한 향기가 퍼집니다. 손으로 만든 케이크가 마음을 녹입니다. 가족과 함께하는 크리스마스, 따뜻함이 담긴 맛을 경험하세요.",
+        "hashtags": [
+          "#크리스마스케이크",
+          "#베이커리추천",
+          "#광주베이커리",
+          "#용봉동맛집",
+          "#따뜻한크리스마스",
+          "#홈메이드케이크"
+        ],
+        "image_prompt_en": "a warm bakery interior at sunset with golden lighting, wooden tables, and fresh pastries on display, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "gym",
+      "seed": 100,
+      "seconds": 14.4,
+      "copy": {
+        "headline": "신년, 건강을 시작하세요",
+        "subcopy": "1월 1일부터 15일까지 모던한 신년을 시작하세요",
+        "caption": "모던한 분위기에서 신년 첫 걸음을 내딛으세요. 체력과 정서 모두를 다독여주는 헬스장입니다. 올해의 건강을 지금부터 시작하세요.",
+        "hashtags": [
+          "#신년건강",
+          "#모던헬스",
+          "#잠실헬스",
+          "#신년멤버십",
+          "#에이치핏",
+          "#건강한신년"
+        ],
+        "image_prompt_en": "modern fitness studio interior with natural light, minimalist design, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "gym",
+      "seed": 101,
+      "seconds": 13.9,
+      "copy": {
+        "headline": "신년, 건강을 시작해요",
+        "subcopy": "1월 1일부터 15일까지 모던한 건강을 경험하세요",
+        "caption": "모던한 분위기에서 신년을 맞이하세요. 체력과 마음까지 다 함께 키워보는 순간입니다. 헬스장의 첫걸음이 되세요.",
+        "hashtags": [
+          "#신년건강",
+          "#모던헬스",
+          "#잠실헬스",
+          "#신년멤버십",
+          "#에이치핏",
+          "#건강스타트"
+        ],
+        "image_prompt_en": "modern fitness studio interior with natural light, minimalist design, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "petgrooming",
+      "seed": 100,
+      "seconds": 16.1,
+      "copy": {
+        "headline": "매주 수요일, 멍냥살롱에서",
+        "subcopy": "반려동물도 편안한 스파를 누려요",
+        "caption": "따뜻한 빛 속에서 반려동물이 편안히 쉬는 시간. 털을 닦고, 마음을 다독여요. 반려동물과 함께하는 따뜻한 순간이에요.",
+        "hashtags": [
+          "#멍냥살롱",
+          "#반려동물스파",
+          "#펫스파데이",
+          "#반려동물미용",
+          "#수원반려동물",
+          "#애완동물스파"
+        ],
+        "image_prompt_en": "a warm and cozy pet spa room with soft lighting, fur-covered chairs, and a calm atmosphere, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "petgrooming",
+      "seed": 101,
+      "seconds": 18.1,
+      "copy": {
+        "headline": "매주 수요일, 멍냥살롱에서",
+        "subcopy": "반려동물도 편안한 스파를 누릴 수 있어요",
+        "caption": "따뜻한 빛에 푸석푸석한 반려동물들이 편안한 시간을 보내고 있어요. 바람을 맞으며 쉬는 듯한 분위기, 마음까지 편안해지는 스파 데이입니다. 반려동물과 함께하는 따뜻한 순간을 지금 경험해보세요.",
+        "hashtags": [
+          "#멍냥살롱",
+          "#반려동물스파데이",
+          "#수요일스파데이",
+          "#애완동물스파",
+          "#반려동물편안함",
+          "#멍냥데이"
+        ],
+        "image_prompt_en": "a cozy pet spa room with soft lighting, warm colors, and calm atmosphere, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "korean_food",
+      "seed": 100,
+      "seconds": 16.1,
+      "copy": {
+        "headline": "가을 보양식, 한옥밥상",
+        "subcopy": "레트로 분위기에서 따뜻한 맛을 즐겨요",
+        "caption": "가을의 향기와 함께 한옥밥상에서 전통을 느껴보세요. 따뜻한 국물과 건강한 식재료가 조화를 이루는 보양식. 레트로한 분위기 속에서 시간을 되살려보세요.",
+        "hashtags": [
+          "#가을보양식",
+          "#한옥밥상",
+          "#전주맛집",
+          "#레트로한식",
+          "#한식당",
+          "#보양식추천"
+        ],
+        "image_prompt_en": "A retro-style hanok restaurant interior with warm wooden tables, vintage decor, and soft golden light, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "korean_food",
+      "seed": 101,
+      "seconds": 17.0,
+      "copy": {
+        "headline": "가을 보양식, 한옥밥상",
+        "subcopy": "레트로 분위기에서 건강을 품으세요",
+        "caption": "가을의 향기를 담은 보양식을 맛보세요. 한옥의 따뜻한 분위기 속에서 시간을 멈추게 만드는 음식을 즐기세요. 레트로 감성과 조화를 이루는 한식의 정석을 경험하세요.",
+        "hashtags": [
+          "#가을보양식",
+          "#한옥밥상",
+          "#전주맛집",
+          "#레트로한식",
+          "#한식추천",
+          "#보양식특선"
+        ],
+        "image_prompt_en": "A retro-style hanok restaurant interior with wooden tables, warm lanterns, and a vintage kitchen setup, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "nail",
+      "seed": 100,
+      "seconds": 14.7,
+      "copy": {
+        "headline": "겨울 신상, 미니멀 출시",
+        "subcopy": "순간, 편안한 겨울 스타일을 만듭니다",
+        "caption": "겨울철의 정취를 담은 미니멀 디자인. 단순하지만 깊은 감각을 선사합니다. 힐링을 위한 네일, 지금 만나보세요.",
+        "hashtags": [
+          "#겨울네일",
+          "#미니멀네일",
+          "#강남네일",
+          "#신상디자인",
+          "#글로우네일",
+          "#겨울스타일"
+        ],
+        "image_prompt_en": "minimalist nail studio with soft lighting, wooden textures, and clean white background, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "nail",
+      "seed": 101,
+      "seconds": 16.7,
+      "copy": {
+        "headline": "겨울 신상, 미니멀 출시",
+        "subcopy": "순간, 달라지는 네일 감각",
+        "caption": "겨울을 위한 간결한 네일 디자인을 만나보세요. 미니멀한 라인과 톤-on-톤 컬러가 어우러진 공간에서, 매일의 스타일을 새롭게 정의합니다. 편안한 분위기 속에서 네일을 즐기세요.",
+        "hashtags": [
+          "#겨울네일",
+          "#미니멀네일",
+          "#강남네일",
+          "#신상디자인",
+          "#글로우네일",
+          "#네일아이디어"
+        ],
+        "image_prompt_en": "minimalist nail studio interior with soft lighting, neutral tones, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "bookstore",
+      "seed": 100,
+      "seconds": 15.5,
+      "copy": {
+        "headline": "작가와의 북토크 시작",
+        "subcopy": "서서히 읽는 책의 향기",
+        "caption": "작가와의 대화 속에서 책을 다시 만나보세요. 미니멀한 분위기에서 마음을 담아내는 순간을 경험하세요. 독서와 대화가 만드는 따뜻한 순간.",
+        "hashtags": [
+          "#작가와의북토크",
+          "#독립서점",
+          "#책한잔",
+          "#서울북토크",
+          "#미니멀리빙",
+          "#서서히읽기"
+        ],
+        "image_prompt_en": "minimalist bookstore interior at evening, soft natural light, wooden tables, books stacked neatly, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "bookstore",
+      "seed": 101,
+      "seconds": 16.7,
+      "copy": {
+        "headline": "작가와의 북토크",
+        "subcopy": "서점에서 책을 만나세요",
+        "caption": "미니멀한 분위기에서 작가와의 대화를 즐기세요. 책의 향기와 함께, 속도 없는 시간을 경험해보세요. 독서를 다시 느껴보세요.",
+        "hashtags": [
+          "#작가와의북토크",
+          "#독립서점",
+          "#책한잔",
+          "#서울서점",
+          "#미니멀리빙",
+          "#책읽기"
+        ],
+        "image_prompt_en": "a minimalist bookstore interior at evening with soft natural light, wooden shelves, a few books, and empty space for text, no text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "laundry_long",
+      "seed": 100,
+      "seconds": 19.9,
+      "copy": {
+        "headline": "겨울 이불 세탁 특가!",
+        "subcopy": "매일 특별한 세탁을 경험하세요",
+        "caption": "겨울을 위한 이불과 패딩을 맑고 깨끗하게 세탁해드립니다. 모던한 분위기에서 따뜻한 추억을 만들어보세요. 집안을 더 깨끗하고 따뜻하게 만들어 주세요.",
+        "hashtags": [
+          "#겨울이불세탁",
+          "#패딩세탁특가",
+          "#깨끗한세상",
+          "#모던세탁",
+          "#추운겨울용",
+          "#세탁특가"
+        ],
+        "image_prompt_en": "modern laundry shop interior with soft lighting, clean white clothes hanging on racks, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": true,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    },
+    {
+      "case_id": "laundry_long",
+      "seed": 101,
+      "seconds": 20.4,
+      "copy": {
+        "headline": "겨울 이불 세탁 특가",
+        "subcopy": "패딩도 깨끗하게 세탁해요",
+        "caption": "겨울 이불과 패딩을 모던하게 세탁해드립니다. 따뜻한 내추럴한 느낌으로 다시 입기 좋아요. 매일 오전 8시 30분부터 오후 9시까지 운영됩니다.",
+        "hashtags": [
+          "#겨울이불세탁",
+          "#패딩세탁",
+          "#모던세탁",
+          "#깨끗한세상",
+          "#세탁특가",
+          "#판교세탁"
+        ],
+        "image_prompt_en": "a modern laundry shop interior with soft lighting, clean white walls, and a cozy winter atmosphere, no text, empty space for text",
+        "attempts": 1
+      },
+      "error": null,
+      "checks": {
+        "json_first_try": true,
+        "json_final": true,
+        "headline_len": true,
+        "subcopy_len": true,
+        "caption_len": true,
+        "hashtag_count": true,
+        "hashtag_format": true,
+        "caption_no_leak": false,
+        "image_prompt_ok": true,
+        "info_preserved": true,
+        "event_ref": true
+      }
+    }
+  ]
+}
