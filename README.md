@@ -1,6 +1,6 @@
 # 인스타 홍보 게시물 생성기
 
-업종·행사명·일시·장소·혜택을 입력하면 인스타그램 피드 이미지(4:5), 캡션, 해시태그를 한 번에 만들어 주는 Streamlit 앱입니다. 자세한 설계와 검증은 [`docs/report_ad-gen.pdf`](docs/report_ad-gen.pdf)를 참고하세요.
+업종·행사명·일시·장소·혜택을 입력하면 인스타그램 피드 이미지(4:5), 캡션, 해시태그를 한 번에 만들어 주는 Streamlit 앱입니다. 자세한 설계와 검증은 [`docs/report_ad-gen.pdf`](docs/report_ad-gen.pdf)를 참고하세요. 작업 과정은 [협업일지](https://app.notion.com/p/c4e7c585de674d0bb3644b45eb5a4ed2)에 날짜별로 기록했습니다.
 
 ## 동작 흐름
 
